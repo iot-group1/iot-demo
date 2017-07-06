@@ -20,9 +20,15 @@ npm install bleacon
 # AWS-IoT
 
 topic: iot-demo
+
 rule:   DynamoDB
+
 SELECT * FROM 'iot_demo'
+
 talbe name : beacon_rfid
+
 Partition Key: beacon_id, type: STRING, value:${beacon_ID}
+
 Sort Key: insert_time, type:STRING, value${insert_time}
+
 role: awsiot_admin
