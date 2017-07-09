@@ -6,7 +6,7 @@ var scanNumtoComfirmRegion;
 var rssiForRegion;
 //consider 'out-region' when rssi greater than this
 var rssiOutRegion;
-var debug = true;
+var debug = false;
 var CreateRegion = function (name) {
     this.inRegion = false;
     this.scanNumInRegion = 0;
@@ -22,6 +22,9 @@ function refreshRegion(beacon, e) {
     if (rssi < rssiForRegion) {
         region.scanNumInRegion += 1;
         region.scanNumOutRegion = 0;
+        if(region.inRegion==true){
+            resetOtherRegion(region.beaconNameOfRegion)
+        }
     }
     if (rssi > rssiOutRegion) {
         region.scanNumInRegion = 0;
