@@ -32,3 +32,12 @@ Partition Key: beacon_id, type: STRING, value:${beacon_ID}
 Sort Key: insert_time, type:STRING, value${insert_time}
 
 role: awsiot_admin
+
+data format:
+beacon_id
+insert_time
+value
+--------------------------------
+989394992934
+7/11/2017, 12:51:21 AM
+{ "beacon_id" : { "S" : "989394992934" }, "insert_time" : { "S" : "7/11/2017, 12:51:21 AM" }, "value" : { "S" : "15" } }
