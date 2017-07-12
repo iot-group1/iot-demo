@@ -7,8 +7,8 @@ function ExtractRfid(idStr) {
     var ids = idStr.split('\n');
     ids.forEach(function (element) {
         //console.log(element);
-        if (idResult.indexOf(element) == -1 && element.length != 0) {
-            //console.log('new');
+        if (idResult.indexOf(element) == -1 && element.length >=40) {
+            //console.log(element.length);
             idResult.push(element);
         }
     }, this);
@@ -16,7 +16,7 @@ function ExtractRfid(idStr) {
 //callnum: times to read rfid 
 //call interval: interval of each call
 function scanRFID(callNum, callInterval, onScanCompleted) {
-
+    idResult=[];
     var read = execfile('./rfidreader', onReadCompleted);
 
     function onReadCompleted(err, stdout, stderr) {
