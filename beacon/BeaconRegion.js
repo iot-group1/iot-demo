@@ -6,7 +6,7 @@ var scanNumtoComfirmRegion;
 var rssiForRegion;
 //consider 'out-region' when rssi greater than this
 var rssiOutRegion;
-var debug = true;
+var debug = false;
 var CreateRegion = function (name) {
     this.inRegion = false;
     this.scanNumInRegion = 0;
