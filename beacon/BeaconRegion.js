@@ -22,6 +22,9 @@ function refreshRegion(beacon, e) {
     if (rssi < rssiForRegion) {
         region.scanNumInRegion += 1;
         region.scanNumOutRegion = 0;
+        if(region.inRegion==true){
+            resetOtherRegion(region.beaconNameOfRegion)
+        }
     }
     if (rssi > rssiOutRegion) {
         region.scanNumInRegion = 0;
