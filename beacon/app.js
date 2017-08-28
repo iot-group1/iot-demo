@@ -22,6 +22,7 @@ r.on('enter', function (region) {
 	beaconId = region.beacon.id;
     exec('python beep.py');
 	debug ? console.log('reading RFID...') : {};
+	beaconRegion.stopReceiveData();
     rfidScaner.scanRFID(8, 1, onScanRfidCompleted)
 });
 
@@ -35,4 +36,7 @@ function onScanRfidCompleted(idResult) {
     debug ? console.log("Read successful...") : {};
 	iotConn.sendMessage('iot_demo',beaconId, new Date().toLocaleString(), idResult.length);
 	controller.sendCmd('start');
+	setTimeout(function () {
+        beaconRegion.resumeReceiveData();
+    }, 4000);
 }
