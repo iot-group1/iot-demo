@@ -6,6 +6,7 @@ var scanNumtoComfirmRegion;
 var rssiForRegion;
 //consider 'out-region' when rssi greater than this
 var rssiOutRegion;
+var receiveData = true;
 var debug = false;
 var CreateRegion = function (name) {
     this.inRegion = false;
@@ -22,7 +23,7 @@ function refreshRegion(beacon, e) {
     if (rssi < rssiForRegion) {
         region.scanNumInRegion += 1;
         region.scanNumOutRegion = 0;
-        if(region.inRegion==true){
+        if (region.inRegion == true) {
             resetOtherRegion(region.beaconNameOfRegion)
         }
     }
@@ -77,9 +78,22 @@ function scanRegion(scanNum, rssiIn, rssiOut) {
     var e = new EventEmitter();
     var r = beaconScaner.scanBeacon();
     r.on('scaned', function (beacon) {
-        debug ? console.log(beacon.name + '-------' + Math.abs(beacon.bleacon.rssi)) : {};
-        refreshRegion(beacon, e);
+        if (receiveData) {
+            debug ? console.log(beacon.name + '-------' + Math.abs(beacon.bleacon.rssi)) : {};
+            refreshRegion(beacon, e);
+        }
     })
     return (e);
 }
+
+function stopReceiveData() {
+    receiveData = false;
+    debug? console.log("stop receive data"):{};
+}
+function resumeReceiveData(){
+    receiveData = true;
+    debug? console.log("resume receive data"):{};
+}
 module.exports.scanRegion = scanRegion;
+module.exports.stopReceiveData=stopReceiveData;
+module.exports.resumeReceiveData=resumeReceiveData;
